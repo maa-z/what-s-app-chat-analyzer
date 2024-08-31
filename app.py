@@ -1,5 +1,6 @@
 import streamlit as st
-from preprocessor import preprocessor,fetch_stats,most_busy_user,create_word_cloud,most_common_words,get_monthly_timeline,get_daily_timeline,get_day_timeline
+from preprocessor import preprocessor,fetch_stats,most_busy_user,most_common_words,get_monthly_timeline,get_daily_timeline,get_day_timeline
+# from preprocessor import create_word_cloud
 from matplotlib import pyplot as plt
 
 
@@ -51,10 +52,10 @@ if uploaded_file is not None:
             with col2:
                 st.dataframe(new_df)
         
-        df_wc = create_word_cloud(selected_user,df)
-        fig , ax = plt.subplots()
-        ax.imshow(df_wc)
-        st.pyplot(fig)
+        # df_wc = create_word_cloud(selected_user,df)
+        # fig , ax = plt.subplots()
+        # ax.imshow(df_wc)
+        # st.pyplot(fig)
 
 
         most_common_words = most_common_words(selected_user,df)

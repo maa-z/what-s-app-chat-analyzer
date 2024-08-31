@@ -1,6 +1,6 @@
 import pandas as pd
 import re
-from wordcloud import WordCloud
+# from wordcloud import WordCloud
 from collections import Counter 
 # import matplotlib.pyplot as plt
 # from urlextract import URLExtract
@@ -19,7 +19,7 @@ def preprocessor(data):
     df = pd.DataFrame({'user_message':messages,'message_date':dates})
     df = df.iloc[1:,:]
     df[['user','message']] = df['user_message'].apply(fetch_message_user)
-    df['message_date'] = pd.to_datetime(df['message_date'],dayfirst=True)
+    df['message_date'] = pd.to_datetime(df['message_date'],dayfirst=True,format="mixed")
     wapp = df[['message_date','user','message']]
     wapp['month'] = wapp['message_date'].dt.month_name()
     wapp['day'] = wapp['message_date'].dt.day
@@ -51,12 +51,12 @@ def most_busy_user(df):
     df = round((df['user'].value_counts()/df.shape[0])*100,2).reset_index().rename(columns={'index':'name','user':'percent'})
     return x ,df
 
-def create_word_cloud(selected_user,df):
-    if selected_user!="OverAll":
-        df = df[df['user']==selected_user]
-    wc = WordCloud(width=500,height=500,min_font_size=10,background_color='white')
-    df_wc = wc.generate(df['message'].str.cat(sep=" "))
-    return df_wc
+# def create_word_cloud(selected_user,df):
+#     if selected_user!="OverAll":
+#         df = df[df['user']==selected_user]
+#     wc = WordCloud(width=500,height=500,min_font_size=10,background_color='white')
+#     df_wc = wc.generate(df['message'].str.cat(sep=" "))
+#     return df_wc
 
 
 def most_common_words(selected_user,df):
